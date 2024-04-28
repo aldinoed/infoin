@@ -25,9 +25,9 @@ module.exports = {
   getPostDetail: async (req, res) => {
     const { id } = req.params;
     try {
-      const users = await model.Post.findAll({ where: { id: id } });
-      if (Object.keys(users).length > 0) {
-        res.json(users);
+      const post = await model.Post.findAll({ where: { id: id } });
+      if (Object.keys(post).length > 0) {
+        res.json(post);
       } else {
         throw new Error("Tidak ada data.");
       }
@@ -36,17 +36,17 @@ module.exports = {
     }
   },
   createPost: async (req, res) => {
-    const { newEmail, newFullname, newPassword } = req.body;
+    const { userId, postTitle, postContent } = req.body;
 
     try {
-      const newUser = await model.Post.create({
-        email: newEmail,
-        fullname: newFullname,
-        password: newPassword,
+      const newPost = await model.Post.create({
+        user_id: userId,
+        post_title: postTitle,
+        post_content: postContent,
       });
       res.status(200).json({
         status: true,
-        message: `User ${newFullname} successfully inserted`,
+        message: `User ${postTitle} successfully inserted`,
       });
     } catch (error) {
       res.status(500).json({ status: true, message: `Error: ${error}` });
