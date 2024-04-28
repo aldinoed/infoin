@@ -46,29 +46,8 @@ module.exports = {
       });
       res.status(200).json({
         status: true,
-        message: `User ${postTitle} successfully inserted`,
+        message: `Post ${postTitle} successfully inserted`,
       });
-    } catch (error) {
-      res.status(500).json({ status: true, message: `Error: ${error}` });
-    }
-  },
-  updatePost: async (req, res) => {
-    const { id } = req.params;
-    const { newFullname, newEmail, newPassword } = req.body;
-
-    try {
-      const response = await model.Post.update(
-        { fullname: newFullname, email: newEmail, password: newPassword },
-        { where: { id: id } }
-      );
-      if (response == 1) {
-        res.status(200).json({
-          status: true,
-          message: `Post ${newFullname} berhasil diupdate`,
-        });
-      } else {
-        throw new Error("Update postingan gagal");
-      }
     } catch (error) {
       res.status(500).json({ status: true, message: `Error: ${error}` });
     }
