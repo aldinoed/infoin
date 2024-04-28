@@ -1,5 +1,8 @@
-const {Sequilize} = require('sequelize');
+const {Sequelize} = require('sequelize');
 
-const sequelize = new Sequilize('postgres://postgres:angga225:5432/infoin');
+const sequelize = new Sequelize('infoin', 'postgres', 'angga225', {
+    host: 'localhost',
+    dialect: 'postgres'
+});
 
 module.exports = sequelize;
